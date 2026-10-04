@@ -1,7 +1,7 @@
-import { Button, Input, Screen, Text } from "@/components/ui";
+import { BackButton, Button, Input, Screen, Text } from "@/components/ui";
 import { useTheme } from "@/theme";
 import { useRef, useState } from "react";
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 type LoginCredentials = {
   email: string;
@@ -43,15 +43,7 @@ export function LoginScreen({
       style={{ paddingHorizontal: spacing[6] }}
     >
       <View style={styles.content}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel="Voltar"
-          hitSlop={8}
-          onPress={onBack}
-          style={{ marginBottom: spacing[8], alignSelf: "flex-start" }}
-        >
-          <Text variant="title">←</Text>
-        </Pressable>
+        <BackButton onPress={onBack} style={{ marginBottom: spacing[8] }} />
 
         <View style={{ gap: spacing[2], marginBottom: spacing[8] }}>
           <Text variant="header">Bem-vindo de volta</Text>
