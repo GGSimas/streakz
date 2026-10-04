@@ -1,5 +1,7 @@
 export { Button } from "./Button";
 export type { ButtonVariant } from "./Button";
+export { Input } from "./Input";
+export type { InputType } from "./Input";
 export { Screen } from "./Screen";
 export { Text } from "./Text";
 export type { TextVariant } from "./Text";
