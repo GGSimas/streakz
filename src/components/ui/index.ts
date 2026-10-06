@@ -1,3 +1,4 @@
+export { Avatar } from "./Avatar";
 export { BackButton } from "./BackButton";
 export { Button } from "./Button";
 export type { ButtonVariant } from "./Button";
