@@ -1,12 +1,17 @@
 import { RegisterScreen } from "@/features/auth/screens/RegisterScreen";
-import { router } from "expo-router";
+import { router, type RelativePathString } from "expo-router";
 
 export default function RegisterRoute() {
   return (
     <RegisterScreen
       onBack={() => router.back()}
       onLogin={() => router.push("/login")}
-      onNext={() => undefined}
+      onNext={({ name }) => {
+        router.push({
+          pathname: "/profile-setup" as RelativePathString,
+          params: { name },
+        });
+      }}
     />
   );
 }
