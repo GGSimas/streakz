@@ -38,6 +38,7 @@ export function LoginScreen({
   }
 
   const EyeIcon = showPassword ? EyeClosed : Eye;
+
   return (
     <Screen
       scroll
@@ -75,7 +76,7 @@ export function LoginScreen({
             secureTextEntry={!showPassword}
             rightIcon={
               <EyeIcon
-                size={24}
+                size={20}
                 color={colors.muted}
                 onPress={() => setShowPassword(!showPassword)}
               />

@@ -90,7 +90,7 @@ export function RegisterScreen({
             secureTextEntry={!showPassword}
             rightIcon={
               <EyeIcon
-                size={24}
+                size={20}
                 color={colors.muted}
                 onPress={() => setShowPassword(!showPassword)}
               />
