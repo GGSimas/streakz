@@ -1,4 +1,5 @@
 import { Avatar, Text } from "@/components/ui";
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { Camera, User } from "lucide-react-native";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -13,12 +14,13 @@ type AddPhotoProps = {
 
 export function AddPhoto({ name, uri, onPress }: AddPhotoProps) {
   const { colors, radius, spacing } = useTheme();
+  const { t } = useAppTranslation();
 
   return (
     <View style={[styles.wrap, { gap: spacing[2] }]}>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel="Adicionar foto"
+        accessibilityLabel={t("addPhoto.label")}
         onPress={onPress}
         style={styles.photo}
       >
@@ -52,7 +54,7 @@ export function AddPhoto({ name, uri, onPress }: AddPhotoProps) {
         </View>
       </Pressable>
       <Text variant="label" style={{ color: colors.muted }}>
-        {uri ? "Toque para alterar a foto" : "Toque para adicionar a foto"}
+        {uri ? t("addPhoto.change") : t("addPhoto.add")}
       </Text>
     </View>
   );

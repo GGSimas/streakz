@@ -1,0 +1,76 @@
+{
+  "common": {
+    "back": "Volver",
+    "email": "Correo",
+    "emailPlaceholder": "tu@email.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Entrar",
+    "image": "Imagen {{index}}"
+  },
+  "welcome": {
+    "createAccount": "Crear cuenta gratis",
+    "signIn": "Ya tengo cuenta — Entrar",
+    "slides": {
+      "together": {
+        "title": "Desafíos que unen",
+        "description": "Únete a grupos, haz check-ins y muestra constancia real."
+      },
+      "gamification": {
+        "title": "Gamificación real",
+        "description": "Gana XP, sube de nivel y desbloquea logros únicos."
+      },
+      "competition": {
+        "title": "Competencia sana",
+        "description": "Rankings globales y entre amigos para mantener la racha."
+      }
+    }
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Entra en tu cuenta de Streakz",
+    "forgotPassword": "Olvidé mi contraseña",
+    "noAccount": "¿No tienes cuenta?",
+    "createNow": "Crear ahora"
+  },
+  "register": {
+    "title": "Crear cuenta",
+    "subtitle": "Empieza tu camino ahora",
+    "fullName": "Nombre completo",
+    "namePlaceholder": "Tu nombre",
+    "passwordPlaceholder": "Mínimo 8 caracteres",
+    "continue": "Continuar",
+    "hasAccount": "¿Ya tienes cuenta?"
+  },
+  "forgotPassword": {
+    "title": "Recuperar contraseña",
+    "subtitle": "Te enviaremos un enlace a tu correo"
+  },
+  "profile": {
+    "eyebrow": "CONFIGURACIÓN INICIAL",
+    "title": "Tu perfil",
+    "subtitle": "Elige cómo aparecerás para otros atletas",
+    "fallbackName": "Perfil",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "username": "Nombre de usuario",
+    "country": "País",
+    "countryPlaceholder": "Tu país",
+    "region": "Estado / Región",
+    "regionPlaceholder": "Estado o región",
+    "city": "Ciudad",
+    "cityPlaceholder": "Tu ciudad",
+    "start": "Empezar el camino"
+  },
+  "addPhoto": {
+    "label": "Añadir foto",
+    "add": "Toca para añadir la foto",
+    "change": "Toca para cambiar la foto"
+  },
+  "permissions": {
+    "photoLibrary": "Permitir acceso a la biblioteca de fotos",
+    "unavailable": "Esta función no está disponible en tu dispositivo",
+    "blocked": "Abre los ajustes del dispositivo para permitir el acceso a esta función",
+    "openSettings": "Abrir ajustes"
+  }
+}

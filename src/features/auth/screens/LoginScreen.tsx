@@ -1,4 +1,5 @@
 import { BackButton, Button, Input, Screen, Text } from "@/components/ui";
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
@@ -23,6 +24,7 @@ export function LoginScreen({
   onForgot,
 }: LoginScreenProps) {
   const { colors, spacing } = useTheme();
+  const { t } = useAppTranslation();
   const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,27 +52,27 @@ export function LoginScreen({
         <BackButton onPress={onBack} style={{ marginBottom: spacing[8] }} />
 
         <View style={{ gap: spacing[2], marginBottom: spacing[8] }}>
-          <Text variant="header">Bem-vindo de volta</Text>
-          <Text variant="subtitle">Entre na sua conta Streakz</Text>
+          <Text variant="header">{t("login.title")}</Text>
+          <Text variant="subtitle">{t("login.subtitle")}</Text>
         </View>
 
         <View style={{ gap: spacing[4] }}>
           <Input
-            label="E-mail"
+            label={t("common.email")}
             type="email"
             value={email}
             onChangeText={setEmail}
-            placeholder="seu@email.com"
+            placeholder={t("common.emailPlaceholder")}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current?.focus()}
           />
           <Input
             ref={passwordRef}
-            label="Senha"
+            label={t("common.password")}
             type="password"
             value={password}
             onChangeText={setPassword}
-            placeholder="••••••••"
+            placeholder={t("common.passwordPlaceholder")}
             returnKeyType="done"
             onSubmitEditing={submit}
             secureTextEntry={!showPassword}
@@ -84,7 +86,7 @@ export function LoginScreen({
           />
 
           <Button variant="link" onPress={onForgot} style={styles.forgot}>
-            Esqueci minha senha
+            {t("login.forgotPassword")}
           </Button>
         </View>
 
@@ -96,16 +98,16 @@ export function LoginScreen({
           }}
         >
           <Button full disabled={!canSubmit} onPress={submit}>
-            Entrar
+            {t("common.signIn")}
           </Button>
           <View style={styles.signupRow}>
-            <Text variant="subtitle">Não tem conta? </Text>
+            <Text variant="subtitle">{t("login.noAccount")} </Text>
             <Button
               variant="link"
               onPress={onRegister}
               style={styles.inlineLink}
             >
-              Criar agora
+              {t("login.createNow")}
             </Button>
           </View>
         </View>
