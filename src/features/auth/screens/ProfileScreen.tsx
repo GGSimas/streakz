@@ -1,7 +1,7 @@
 import { Button, Input, Screen, Text } from "@/components/ui";
 import { useTheme } from "@/theme";
 import { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { PermissionManager } from "@/components";
 import { pickImage } from "@/services/cameraService";
 
@@ -25,15 +25,13 @@ export function ProfileScreen({
   initialName = "",
   onDone,
 }: ProfileScreenProps) {
-  const { colors, spacing, radius, text } = useTheme();
+  const { colors, spacing } = useTheme();
   const [photoUri, setPhotoUri] = useState<string | undefined>();
   const [name, setName] = useState(initialName);
   const [username, setUsername] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
-  const [usernameFocused, setUsernameFocused] = useState(false);
-
   async function handleAddPhoto() {
     try {
       const photoUri = await pickImage();
@@ -105,49 +103,20 @@ export function ProfileScreen({
               autoComplete="name"
               textContentType="name"
             />
-            <View style={{ gap: spacing[1.5] }}>
-              <Text variant="label">Username</Text>
-              <View
-                style={[
-                  styles.username,
-                  {
-                    backgroundColor: colors.input,
-                    borderColor: usernameFocused
-                      ? colors.focus
-                      : colors.inputBorder,
-                    borderRadius: radius.lg,
-                    paddingHorizontal: spacing[4],
-                    gap: spacing[1],
-                  },
-                ]}
-              >
+            <Input
+              label="Username"
+              value={username}
+              onChangeText={(value) => setUsername(value.replace(/\s/g, ""))}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="username"
+              textContentType="username"
+              leftIcon={
                 <Text variant="paragraph" style={{ color: colors.muted }}>
                   @
                 </Text>
-                <TextInput
-                  accessibilityLabel="Username"
-                  value={username}
-                  onChangeText={(value) =>
-                    setUsername(value.replace(/\s/g, ""))
-                  }
-                  placeholderTextColor={colors.muted}
-                  selectionColor={colors.lime}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  autoComplete="username"
-                  textContentType="username"
-                  onFocus={() => setUsernameFocused(true)}
-                  onBlur={() => setUsernameFocused(false)}
-                  style={{
-                    flex: 1,
-                    fontFamily: text.body.fontFamily,
-                    fontSize: text.body.fontSize,
-                    color: colors.text,
-                    paddingVertical: spacing[3.5],
-                  }}
-                />
-              </View>
-            </View>
+              }
+            />
             <Input
               label="País"
               value={country}
@@ -182,10 +151,5 @@ export function ProfileScreen({
 const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
-  },
-  username: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
   },
 });

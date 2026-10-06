@@ -1,5 +1,6 @@
 import { BackButton, Button, Input, Screen, Text } from "@/components/ui";
 import { useTheme } from "@/theme";
+import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
@@ -25,6 +26,7 @@ export function LoginScreen({
   const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const canSubmit = email.trim().length > 0 && password.length > 0;
 
   function submit() {
@@ -35,6 +37,7 @@ export function LoginScreen({
     onLogin({ email: email.trim(), password });
   }
 
+  const EyeIcon = showPassword ? EyeClosed : Eye;
   return (
     <Screen
       scroll
@@ -69,6 +72,14 @@ export function LoginScreen({
             placeholder="••••••••"
             returnKeyType="done"
             onSubmitEditing={submit}
+            secureTextEntry={!showPassword}
+            rightIcon={
+              <EyeIcon
+                size={24}
+                color={colors.muted}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
           />
 
           <Button variant="link" onPress={onForgot} style={styles.forgot}>
@@ -88,7 +99,11 @@ export function LoginScreen({
           </Button>
           <View style={styles.signupRow}>
             <Text variant="subtitle">Não tem conta? </Text>
-            <Button variant="link" onPress={onRegister} style={styles.inlineLink}>
+            <Button
+              variant="link"
+              onPress={onRegister}
+              style={styles.inlineLink}
+            >
               Criar agora
             </Button>
           </View>

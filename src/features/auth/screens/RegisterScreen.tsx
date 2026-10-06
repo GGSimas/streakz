@@ -1,5 +1,6 @@
 import { BackButton, Button, Input, Screen, Text } from "@/components/ui";
 import { useTheme } from "@/theme";
+import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
@@ -15,14 +16,21 @@ type RegisterScreenProps = {
   onLogin: () => void;
 };
 
-export function RegisterScreen({ onBack, onNext, onLogin }: RegisterScreenProps) {
-  const { spacing } = useTheme();
+export function RegisterScreen({
+  onBack,
+  onNext,
+  onLogin,
+}: RegisterScreenProps) {
+  const { spacing, colors } = useTheme();
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const canSubmit = name.trim().length > 0 && email.trim().length > 0 && password.length >= 8;
+  const [showPassword, setShowPassword] = useState(false);
+
+  const canSubmit =
+    name.trim().length > 0 && email.trim().length > 0 && password.length >= 8;
 
   function submit() {
     if (!canSubmit) {
@@ -32,6 +40,7 @@ export function RegisterScreen({ onBack, onNext, onLogin }: RegisterScreenProps)
     onNext({ name: name.trim(), email: email.trim(), password });
   }
 
+  const EyeIcon = showPassword ? EyeClosed : Eye;
   return (
     <Screen
       scroll
@@ -78,10 +87,20 @@ export function RegisterScreen({ onBack, onNext, onLogin }: RegisterScreenProps)
             placeholder="Mínimo 8 caracteres"
             returnKeyType="done"
             onSubmitEditing={submit}
+            secureTextEntry={!showPassword}
+            rightIcon={
+              <EyeIcon
+                size={24}
+                color={colors.muted}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
           />
         </View>
 
-        <View style={{ marginTop: "auto", gap: spacing[3], paddingTop: spacing[8] }}>
+        <View
+          style={{ marginTop: "auto", gap: spacing[3], paddingTop: spacing[8] }}
+        >
           <Button full disabled={!canSubmit} onPress={submit}>
             Continuar
           </Button>
