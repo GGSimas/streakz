@@ -1,56 +1,144 @@
-# Welcome to your Expo app 👋
+# Streakz Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile do **Streakz**, uma plataforma social de desafios de treino com grupos, check-ins, comprovação por mídia, ranking, XP, níveis e conquistas.
 
-## Get started
+Este projeto é a implementação mobile em React Native/Expo do MVP descrito em [`../../docs/STREAKZ_PROJECT_SPEC.md`](../../docs/STREAKZ_PROJECT_SPEC.md).
 
-1. Install dependencies
+## Stack
 
-   ```bash
-   npm install
-   ```
+- Expo SDK 57
+- React Native 0.86
+- React 19
+- TypeScript
+- Expo Router
+- React Native Reanimated
+- Expo Image
+- Expo Image Picker
+- Expo Localization
+- i18next + react-i18next
+- Lucide React Native
 
-2. Start the app
+## Estrutura
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+src/
+├── app/                 # Rotas do Expo Router
+├── components/          # Componentes compartilhados
+│   └── ui/              # Componentes base de UI
+├── features/            # Funcionalidades por domínio
+│   └── auth/            # Fluxos de autenticação/onboarding
+├── i18n/                # Internacionalização
+├── services/            # Serviços de plataforma e integrações
+└── theme/               # Tokens de design e ThemeProvider
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Rotas devem permanecer finas. A lógica de domínio e componentes de tela vivem em `src/features`.
 
-### Other setup steps
+## Como rodar
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Instale as dependências:
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Inicie o servidor de desenvolvimento:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run start
+```
 
-## Join the community
+Atalhos úteis:
 
-Join our community of developers creating universal apps.
+```bash
+npm run ios
+npm run android
+npm run web
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Scripts
+
+```bash
+npm run start       # inicia o Expo
+npm run ios         # abre no iOS
+npm run android     # abre no Android
+npm run web         # abre no navegador
+npm run lint        # executa expo lint
+npm run typeCheck   # executa tsc --noEmit
+npm run commit      # inicia commitizen
+```
+
+Antes de finalizar uma mudança relevante, rode:
+
+```bash
+npm run lint
+npm run typeCheck
+```
+
+## Internacionalização
+
+O app usa `expo-localization`, `i18next` e `react-i18next`.
+
+Arquivos principais:
+
+```text
+src/i18n/index.ts
+src/i18n/useAppTranslation.ts
+src/i18n/locales/pt-BR.json
+src/i18n/locales/en.json
+src/i18n/locales/es.json
+```
+
+Idiomas suportados:
+
+- `pt-BR`
+- `en`
+- `es`
+
+O idioma padrão é `pt-BR`. O app resolve o idioma inicial a partir do locale do dispositivo e atualiza o i18n no layout raiz.
+
+Para usar traduções em componentes:
+
+```tsx
+import { useAppTranslation } from "@/i18n";
+
+const { t } = useAppTranslation();
+
+return <Text>{t("login.title")}</Text>;
+```
+
+Ao adicionar textos novos:
+
+- adicione a chave em todos os arquivos de `src/i18n/locales`;
+- prefira chaves por domínio ou fluxo, como `auth`, `profile`, `groups` e `checkins`;
+- evite strings visíveis hardcoded em componentes;
+- mantenha códigos e estados de domínio estáveis, traduzindo apenas a apresentação.
+
+## Convenções de desenvolvimento
+
+- Use Expo Router para navegação. Rotas ficam em `src/app`.
+- Use componentes reutilizáveis de `src/components/ui` antes de criar novos.
+- Use tokens de `src/theme` para cores, espaçamento, tipografia, sombras e bordas.
+- Mantenha regras de negócio fora de componentes visuais.
+- Para estado remoto, prefira TanStack Query quando essa camada for adicionada ao app.
+- Para estado global local, use Zustand ou Context API apenas quando houver necessidade clara.
+- Para permissões de câmera/fotos, use os serviços em `src/services/permissions`.
+- Para mudanças de produto, consulte a especificação em `docs/STREAKZ_PROJECT_SPEC.md`.
+
+## Produto
+
+O MVP do Streakz deve priorizar:
+
+- autenticação e perfil;
+- grupos e desafios;
+- check-ins com foto ou vídeo;
+- moderação manual;
+- ranking por grupo;
+- XP, níveis, conquistas e títulos;
+- experiência mobile nativa, acessível e consistente.
+
+Regras críticas como XP, ranking, permissões, aprovação de check-ins e limites diários não devem depender apenas do cliente. Quando essas áreas forem implementadas, a autoridade deve estar no backend/Supabase.
+
+## Observações
+
+O app está configurado com Continuous Native Generation. Não edite diretórios `ios/` ou `android/` manualmente caso eles sejam gerados. Configure comportamento nativo via `app.json`, config plugins e comandos do Expo.
