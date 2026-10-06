@@ -1,4 +1,5 @@
 import { BackButton, Button, Input, Screen, Text } from "@/components/ui";
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
@@ -22,6 +23,7 @@ export function RegisterScreen({
   onLogin,
 }: RegisterScreenProps) {
   const { spacing, colors } = useTheme();
+  const { t } = useAppTranslation();
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const [name, setName] = useState("");
@@ -52,16 +54,16 @@ export function RegisterScreen({
         <BackButton onPress={onBack} style={{ marginBottom: spacing[8] }} />
 
         <View style={{ gap: spacing[2], marginBottom: spacing[8] }}>
-          <Text variant="header">Criar conta</Text>
-          <Text variant="subtitle">Comece sua jornada agora</Text>
+          <Text variant="header">{t("register.title")}</Text>
+          <Text variant="subtitle">{t("register.subtitle")}</Text>
         </View>
 
         <View style={{ gap: spacing[4] }}>
           <Input
-            label="Nome completo"
+            label={t("register.fullName")}
             value={name}
             onChangeText={setName}
-            placeholder="Seu nome"
+            placeholder={t("register.namePlaceholder")}
             autoCapitalize="words"
             autoComplete="name"
             textContentType="name"
@@ -70,21 +72,21 @@ export function RegisterScreen({
           />
           <Input
             ref={emailRef}
-            label="E-mail"
+            label={t("common.email")}
             type="email"
             value={email}
             onChangeText={setEmail}
-            placeholder="seu@email.com"
+            placeholder={t("common.emailPlaceholder")}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current?.focus()}
           />
           <Input
             ref={passwordRef}
-            label="Senha"
+            label={t("common.password")}
             type="password"
             value={password}
             onChangeText={setPassword}
-            placeholder="Mínimo 8 caracteres"
+            placeholder={t("register.passwordPlaceholder")}
             returnKeyType="done"
             onSubmitEditing={submit}
             secureTextEntry={!showPassword}
@@ -102,12 +104,12 @@ export function RegisterScreen({
           style={{ marginTop: "auto", gap: spacing[3], paddingTop: spacing[8] }}
         >
           <Button full disabled={!canSubmit} onPress={submit}>
-            Continuar
+            {t("register.continue")}
           </Button>
           <View style={styles.loginRow}>
-            <Text variant="subtitle">Já tem conta? </Text>
+            <Text variant="subtitle">{t("register.hasAccount")} </Text>
             <Button variant="link" onPress={onLogin} style={styles.inlineLink}>
-              Entrar
+              {t("common.signIn")}
             </Button>
           </View>
         </View>

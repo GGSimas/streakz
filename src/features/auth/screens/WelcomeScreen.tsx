@@ -1,29 +1,15 @@
 import { Button, Screen, Text } from "@/components/ui";
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { ImageCarousel, SlideIndicator } from "./components";
 
-const slides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&auto=format",
-    title: "Desafios que unem",
-    description: "Entre em grupos, faça check-ins e mostre consistência real.",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&auto=format",
-    title: "Gamificação real",
-    description: "Ganhe XP, suba de nível e desbloqueie conquistas únicas.",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&h=600&fit=crop&auto=format",
-    title: "Competição saudável",
-    description: "Rankings globais e entre amigos para manter a chama acesa.",
-  },
+const slideImages = [
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&h=600&fit=crop&auto=format",
 ] as const;
 
 type WelcomeScreenProps = {
@@ -33,7 +19,25 @@ type WelcomeScreenProps = {
 
 export function WelcomeScreen({ onLogin, onRegister }: WelcomeScreenProps) {
   const { colors, spacing } = useTheme();
+  const { t } = useAppTranslation();
   const [index, setIndex] = useState(0);
+  const slides = [
+    {
+      image: slideImages[0],
+      title: t("welcome.slides.together.title"),
+      description: t("welcome.slides.together.description"),
+    },
+    {
+      image: slideImages[1],
+      title: t("welcome.slides.gamification.title"),
+      description: t("welcome.slides.gamification.description"),
+    },
+    {
+      image: slideImages[2],
+      title: t("welcome.slides.competition.title"),
+      description: t("welcome.slides.competition.description"),
+    },
+  ];
   const current = slides[index];
 
   return (
@@ -68,10 +72,10 @@ export function WelcomeScreen({ onLogin, onRegister }: WelcomeScreenProps) {
 
         <View style={{ gap: spacing[3] }}>
           <Button full onPress={onRegister}>
-            Criar conta gratuita
+            {t("welcome.createAccount")}
           </Button>
           <Button variant="ghost" full onPress={onLogin}>
-            Já tenho conta — Entrar
+            {t("welcome.signIn")}
           </Button>
         </View>
       </View>

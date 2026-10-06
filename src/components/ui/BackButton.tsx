@@ -1,3 +1,4 @@
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { ArrowLeft } from "lucide-react-native";
 import { Pressable, StyleSheet, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
@@ -8,11 +9,12 @@ type BackButtonProps = Omit<PressableProps, "style" | "children"> & {
 
 export function BackButton({ style, ...rest }: BackButtonProps) {
   const { colors } = useTheme();
+  const { t } = useAppTranslation();
 
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel="Voltar"
+      accessibilityLabel={t("common.back")}
       hitSlop={8}
       style={({ pressed }) => [styles.button, pressed && styles.pressed, style]}
       {...rest}

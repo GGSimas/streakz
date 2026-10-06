@@ -1,4 +1,5 @@
 import { Button, Input, Screen, Text } from "@/components/ui";
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -26,6 +27,7 @@ export function ProfileScreen({
   onDone,
 }: ProfileScreenProps) {
   const { colors, spacing } = useTheme();
+  const { t } = useAppTranslation();
   const [photoUri, setPhotoUri] = useState<string | undefined>();
   const [name, setName] = useState(initialName);
   const [username, setUsername] = useState("");
@@ -66,7 +68,7 @@ export function ProfileScreen({
   return (
     <PermissionManager
       permissionName="photoLibrary"
-      permissionDescription="Permitir acesso à biblioteca de fotos"
+      permissionDescription={t("permissions.photoLibrary")}
     >
       <Screen
         scroll
@@ -77,17 +79,15 @@ export function ProfileScreen({
         <View style={styles.content}>
           <View style={{ gap: spacing[1], marginBottom: spacing[8] }}>
             <Text variant="label" style={{ color: colors.lime }}>
-              CONFIGURAÇÃO INICIAL
+              {t("profile.eyebrow")}
             </Text>
-            <Text variant="header">Seu perfil</Text>
-            <Text variant="subtitle">
-              Personalize como você aparecerá para outros atletas
-            </Text>
+            <Text variant="header">{t("profile.title")}</Text>
+            <Text variant="subtitle">{t("profile.subtitle")}</Text>
           </View>
 
           <View style={{ marginBottom: spacing[8] }}>
             <AddPhoto
-              name={name || "Perfil"}
+              name={name || t("profile.fallbackName")}
               uri={photoUri}
               onPress={handleAddPhoto}
             />
@@ -95,16 +95,16 @@ export function ProfileScreen({
 
           <View style={{ gap: spacing[4] }}>
             <Input
-              label="Nome"
+              label={t("profile.name")}
               value={name}
               onChangeText={setName}
-              placeholder="Seu nome"
+              placeholder={t("profile.namePlaceholder")}
               autoCapitalize="words"
               autoComplete="name"
               textContentType="name"
             />
             <Input
-              label="Username"
+              label={t("profile.username")}
               value={username}
               onChangeText={(value) => setUsername(value.replace(/\s/g, ""))}
               autoCapitalize="none"
@@ -118,28 +118,28 @@ export function ProfileScreen({
               }
             />
             <Input
-              label="País"
+              label={t("profile.country")}
               value={country}
               onChangeText={setCountry}
-              placeholder="Seu país"
+              placeholder={t("profile.countryPlaceholder")}
             />
             <Input
-              label="Estado / Região"
+              label={t("profile.region")}
               value={state}
               onChangeText={setState}
-              placeholder="Estado ou região"
+              placeholder={t("profile.regionPlaceholder")}
             />
             <Input
-              label="Cidade"
+              label={t("profile.city")}
               value={city}
               onChangeText={setCity}
-              placeholder="Sua cidade"
+              placeholder={t("profile.cityPlaceholder")}
             />
           </View>
 
           <View style={{ marginTop: "auto", paddingTop: spacing[6] }}>
             <Button full disabled={!canSubmit} onPress={submit}>
-              Começar jornada
+              {t("profile.start")}
             </Button>
           </View>
         </View>

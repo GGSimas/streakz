@@ -1,3 +1,4 @@
+import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { Pressable, StyleSheet, View } from "react-native";
 
@@ -10,6 +11,7 @@ type SlideIndicatorProps = {
 
 export function SlideIndicator({ count, index, onChange, labels }: SlideIndicatorProps) {
   const { colors, spacing, radius } = useTheme();
+  const { t } = useAppTranslation();
 
   return (
     <View style={[styles.dots, { gap: spacing[1.5] }]}>
@@ -20,7 +22,7 @@ export function SlideIndicator({ count, index, onChange, labels }: SlideIndicato
           <Pressable
             key={itemIndex}
             accessibilityRole="button"
-            accessibilityLabel={labels?.[itemIndex] ?? `Imagem ${itemIndex + 1}`}
+            accessibilityLabel={labels?.[itemIndex] ?? t("common.image", { index: itemIndex + 1 })}
             accessibilityState={{ selected }}
             hitSlop={8}
             onPress={() => onChange(itemIndex)}

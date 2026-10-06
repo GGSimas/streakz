@@ -1,0 +1,76 @@
+{
+  "common": {
+    "back": "Back",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Sign in",
+    "image": "Image {{index}}"
+  },
+  "welcome": {
+    "createAccount": "Create a free account",
+    "signIn": "I already have an account — Sign in",
+    "slides": {
+      "together": {
+        "title": "Challenges that bring people together",
+        "description": "Join groups, check in, and show real consistency."
+      },
+      "gamification": {
+        "title": "Real gamification",
+        "description": "Earn XP, level up, and unlock unique achievements."
+      },
+      "competition": {
+        "title": "Healthy competition",
+        "description": "Global and friends rankings to keep the streak alive."
+      }
+    }
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your Streakz account",
+    "forgotPassword": "Forgot my password",
+    "noAccount": "Don't have an account?",
+    "createNow": "Create one now"
+  },
+  "register": {
+    "title": "Create account",
+    "subtitle": "Start your journey now",
+    "fullName": "Full name",
+    "namePlaceholder": "Your name",
+    "passwordPlaceholder": "At least 8 characters",
+    "continue": "Continue",
+    "hasAccount": "Already have an account?"
+  },
+  "forgotPassword": {
+    "title": "Reset password",
+    "subtitle": "We'll send a link to your email"
+  },
+  "profile": {
+    "eyebrow": "INITIAL SETUP",
+    "title": "Your profile",
+    "subtitle": "Choose how you'll appear to other athletes",
+    "fallbackName": "Profile",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "username": "Username",
+    "country": "Country",
+    "countryPlaceholder": "Your country",
+    "region": "State / Region",
+    "regionPlaceholder": "State or region",
+    "city": "City",
+    "cityPlaceholder": "Your city",
+    "start": "Start the journey"
+  },
+  "addPhoto": {
+    "label": "Add photo",
+    "add": "Tap to add a photo",
+    "change": "Tap to change the photo"
+  },
+  "permissions": {
+    "photoLibrary": "Allow access to your photo library",
+    "unavailable": "This feature isn't available on your device",
+    "blocked": "Open your device settings to allow access to this feature",
+    "openSettings": "Open settings"
+  }
+}

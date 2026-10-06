@@ -39,6 +39,15 @@
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
+      ],
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "pt-BR", "es"],
+            "android": ["en", "pt-BR", "es"]
+          }
+        }
       ]
     ],
     "experiments": {
