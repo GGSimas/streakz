@@ -1,7 +1,9 @@
 import "react-native-url-polyfill/auto";
 
 import i18n, { resolveLanguage } from "@/i18n";
+import { queryClient } from "@/lib/tanstack";
 import { ThemeProvider, useTheme } from "@/theme";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { useLocales } from "expo-localization";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -43,12 +45,12 @@ function RootNavigator() {
 
 export default function RootLayout() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <AppLocalization />
       <ThemeProvider>
         <RootNavigator />
       </ThemeProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 
