@@ -26,7 +26,6 @@ const checkPermission = async (
     case "photoLibrary": {
       const photoLibraryStatus =
         await ImagePicker.getMediaLibraryPermissionsAsync();
-      console.log("check", photoLibraryStatus);
       return mapPermissionStatus(photoLibraryStatus);
     }
     default:
@@ -45,7 +44,6 @@ const requestPermission = async (
     case "photoLibrary": {
       const photoLibraryStatus =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
-      console.log("reuqest", photoLibraryStatus);
       return mapPermissionStatus(photoLibraryStatus);
     }
     default:
