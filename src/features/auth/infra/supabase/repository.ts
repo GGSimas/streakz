@@ -61,9 +61,37 @@ async function logout(): Promise<void> {
   }
 }
 
+async function getUserSession(): Promise<AuthUser | null> {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error) {
+    throw toAuthError(error);
+  }
+
+  return data.session?.user ? toAuthUser(data.session.user) : null;
+}
+
+function listenToAuthStateChange(
+  callback: (user: AuthUser | null) => void,
+): () => void {
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
+    try {
+      callback(session?.user ? toAuthUser(session.user) : null);
+    } catch {
+      callback(null);
+    }
+  });
+
+  return () => subscription.unsubscribe();
+}
+
 export const authUserRepository: AuthUserRepository = {
   login,
   register,
   getUser,
   logout,
+  getUserSession,
+  listenToAuthStateChange,
 };

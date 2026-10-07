@@ -7,7 +7,6 @@ export default function LoginRoute() {
       onBack={() => router.back()}
       onRegister={() => router.push("/register")}
       onForgot={() => router.push("/forgot-password")}
-      onLogin={() => undefined}
     />
   );
 }

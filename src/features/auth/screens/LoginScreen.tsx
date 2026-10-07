@@ -4,22 +4,16 @@ import { useTheme } from "@/theme";
 import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-
-type LoginCredentials = {
-  email: string;
-  password: string;
-};
+import { useLoginAccount } from "./hooks";
 
 type LoginScreenProps = {
   onBack: () => void;
-  onLogin: (credentials: LoginCredentials) => void;
   onRegister: () => void;
   onForgot: () => void;
 };
 
 export function LoginScreen({
   onBack,
-  onLogin,
   onRegister,
   onForgot,
 }: LoginScreenProps) {
@@ -31,12 +25,12 @@ export function LoginScreen({
   const [showPassword, setShowPassword] = useState(false);
   const canSubmit = email.trim().length > 0 && password.length > 0;
 
+  const { login, isLoading } = useLoginAccount();
   function submit() {
     if (!canSubmit) {
       return;
     }
-
-    onLogin({ email: email.trim(), password });
+    login({ email: email.trim(), password });
   }
 
   const EyeIcon = showPassword ? EyeClosed : Eye;
@@ -97,7 +91,7 @@ export function LoginScreen({
             paddingTop: spacing[8],
           }}
         >
-          <Button full disabled={!canSubmit} onPress={submit}>
+          <Button full disabled={!canSubmit || isLoading} onPress={submit}>
             {t("common.signIn")}
           </Button>
           <View style={styles.signupRow}>

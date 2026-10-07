@@ -4,6 +4,7 @@ import { useTheme } from "@/theme";
 import { Eye, EyeClosed } from "lucide-react-native";
 import { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
+import { useRegisterAccount } from "./hooks";
 
 type RegisterAccount = {
   name: string;
@@ -13,7 +14,7 @@ type RegisterAccount = {
 
 type RegisterScreenProps = {
   onBack: () => void;
-  onNext: (account: RegisterAccount) => void;
+  onNext: (account: Omit<RegisterAccount, "password">) => void;
   onLogin: () => void;
 };
 
@@ -30,6 +31,11 @@ export function RegisterScreen({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { register, isLoading } = useRegisterAccount({
+    onSuccess: () => {
+      onNext({ name: name.trim(), email: email.trim() });
+    },
+  });
 
   const canSubmit =
     name.trim().length > 0 && email.trim().length > 0 && password.length >= 8;
@@ -39,7 +45,7 @@ export function RegisterScreen({
       return;
     }
 
-    onNext({ name: name.trim(), email: email.trim(), password });
+    register({ fullName: name.trim(), email: email.trim(), password });
   }
 
   const EyeIcon = showPassword ? EyeClosed : Eye;
@@ -103,7 +109,7 @@ export function RegisterScreen({
         <View
           style={{ marginTop: "auto", gap: spacing[3], paddingTop: spacing[8] }}
         >
-          <Button full disabled={!canSubmit} onPress={submit}>
+          <Button full disabled={!canSubmit || isLoading} onPress={submit}>
             {t("register.continue")}
           </Button>
           <View style={styles.loginRow}>
