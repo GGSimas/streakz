@@ -1,3 +1,5 @@
+import "react-native-url-polyfill/auto";
+
 import i18n, { resolveLanguage } from "@/i18n";
 import { ThemeProvider, useTheme } from "@/theme";
 import { useLocales } from "expo-localization";
