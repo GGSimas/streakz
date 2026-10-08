@@ -1,11 +1,13 @@
 import { Button, Screen, Text } from "@/components/ui";
-import { useAccountLogout } from "@/features/auth/screens/hooks/useAccountLogout";
+import { useAccountLogout } from "@/features/auth/screens/hooks";
 
-export default function ProtectedHomeRoute() {
+export default function ProfileRoute() {
   const { logout } = useAccountLogout();
+
   return (
     <Screen style={{ justifyContent: "center", alignItems: "center" }}>
-      <Text variant="header">Usuário autenticado</Text>
+      <Text variant="header">Perfil</Text>
+
       <Button full onPress={() => logout()} variant="secondary">
         Sair
       </Button>
