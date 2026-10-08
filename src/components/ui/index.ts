@@ -1,5 +1,6 @@
 export { Avatar } from "./Avatar";
 export { BackButton } from "./BackButton";
+export { BottomNav } from "./BottomNav";
 export { Button } from "./Button";
 export type { ButtonVariant } from "./Button";
 export { Input } from "./Input";
