@@ -1,9 +1,13 @@
-import { Screen, Text } from "@/components/ui";
+import { HomeScreen } from "@/features/home/screens";
+import { router } from "expo-router";
 
 export default function HomeRoute() {
   return (
-    <Screen style={{ justifyContent: "center", alignItems: "center" }}>
-      <Text variant="header">Home</Text>
-    </Screen>
+    <HomeScreen
+      onCheckin={() => undefined}
+      onExplore={() => router.push("/explore")}
+      onGroup={() => undefined}
+      onNotifications={() => undefined}
+    />
   );
 }

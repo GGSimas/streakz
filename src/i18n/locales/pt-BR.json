@@ -72,5 +72,55 @@
     "unavailable": "Este recurso não está disponível no seu dispositivo",
     "blocked": "É necessário abrir as configurações do seu dispositivo para permitir o acesso a este recurso",
     "openSettings": "Abrir configurações"
+  },
+  "status": {
+    "active": "Em andamento",
+    "scheduled": "Agendado",
+    "finished": "Finalizado",
+    "pending": "Pendente",
+    "approved": "Aprovado",
+    "rejected": "Recusado",
+    "cancelled": "Cancelado"
+  },
+  "home": {
+    "greeting": {
+      "morning": "BOM DIA 👋",
+      "afternoon": "BOA TARDE 👋",
+      "evening": "BOA NOITE 👋"
+    },
+    "notifications": "Notificações",
+    "progress": {
+      "currentLevel": "Nível atual",
+      "xp": "{{value}} XP"
+    },
+    "challenges": {
+      "title": "Seus desafios",
+      "activeCount": "{{count}} ativos"
+    },
+    "group": {
+      "daysLeft": "{{count}} dias restantes",
+      "startsIn": "Começa em {{count}} dias",
+      "finished": "Finalizado",
+      "champion": "Campeão!",
+      "finishedPlace": "{{position}}º lugar · {{checkins}} check-ins",
+      "position": "Posição",
+      "checkins": "Check-ins",
+      "progress": "Progresso",
+      "checkin": "Fazer check-in",
+      "view": "Ver grupo"
+    },
+    "feed": {
+      "title": "Atividade recente",
+      "photo": "Check-in",
+      "like": "Curtir",
+      "comment": "Comentar",
+      "emptyTitle": "Nenhuma atividade ainda",
+      "emptyDescription": "Quando você e seus grupos fizerem check-ins, eles aparecem aqui."
+    },
+    "empty": {
+      "challengesTitle": "Nenhum desafio ainda",
+      "challengesDescription": "Entre em um grupo ou crie o seu para começar a competir.",
+      "challengesCta": "Explorar desafios"
+    }
   }
 }
