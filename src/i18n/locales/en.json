@@ -72,5 +72,55 @@
     "unavailable": "This feature isn't available on your device",
     "blocked": "Open your device settings to allow access to this feature",
     "openSettings": "Open settings"
+  },
+  "status": {
+    "active": "In progress",
+    "scheduled": "Scheduled",
+    "finished": "Finished",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "cancelled": "Cancelled"
+  },
+  "home": {
+    "greeting": {
+      "morning": "GOOD MORNING 👋",
+      "afternoon": "GOOD AFTERNOON 👋",
+      "evening": "GOOD EVENING 👋"
+    },
+    "notifications": "Notifications",
+    "progress": {
+      "currentLevel": "Current level",
+      "xp": "{{value}} XP"
+    },
+    "challenges": {
+      "title": "Your challenges",
+      "activeCount": "{{count}} active"
+    },
+    "group": {
+      "daysLeft": "{{count}} days left",
+      "startsIn": "Starts in {{count}} days",
+      "finished": "Finished",
+      "champion": "Champion!",
+      "finishedPlace": "{{position}}th place · {{checkins}} check-ins",
+      "position": "Position",
+      "checkins": "Check-ins",
+      "progress": "Progress",
+      "checkin": "Check in",
+      "view": "View group"
+    },
+    "feed": {
+      "title": "Recent activity",
+      "photo": "Check-in",
+      "like": "Like",
+      "comment": "Comment",
+      "emptyTitle": "No activity yet",
+      "emptyDescription": "When you and your groups check in, they'll show up here."
+    },
+    "empty": {
+      "challengesTitle": "No challenges yet",
+      "challengesDescription": "Join a group or create your own to start competing.",
+      "challengesCta": "Explore challenges"
+    }
   }
 }
