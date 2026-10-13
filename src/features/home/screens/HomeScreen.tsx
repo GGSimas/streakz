@@ -1,14 +1,16 @@
-import { EmptyState, Screen, Text } from "@/components/ui";
+import { Screen } from "@/components/ui";
 import { useAppTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
+import { useState } from "react";
 import { View } from "react-native";
 import {
-  HomeFeedCard,
-  HomeGroupCard,
   HomeHeader,
   HomeProgressCard,
+  HomeSectionTabs,
+  type HomeSectionTab,
 } from "../components";
 import { mockHomeData } from "../data/mock";
+import { ChallengesTab, FeedTabs } from "./tabs";
 
 type HomeScreenProps = {
   onGroup?: (groupId: string) => void;
@@ -23,10 +25,11 @@ export function HomeScreen({
   onCheckin,
   onExplore,
 }: HomeScreenProps) {
-  const { colors, spacing } = useTheme();
+  const { spacing } = useTheme();
   const { t } = useAppTranslation();
   const { user, unreadNotifications, groups, feed } = mockHomeData;
   const myGroups = groups.filter((group) => group.isMember);
+  const [activeTab, setActiveTab] = useState<HomeSectionTab>("challenges");
 
   return (
     <Screen scroll style={{ paddingBottom: spacing[14] }}>
@@ -37,54 +40,25 @@ export function HomeScreen({
           onNotifications={() => onNotifications?.()}
         />
         <HomeProgressCard user={user} />
+        <HomeSectionTabs
+          activeTab={activeTab}
+          challengesLabel={t("home.challenges.title")}
+          feedLabel={t("home.feed.title")}
+          challengesBadge={String(myGroups.length)}
+          onChange={setActiveTab}
+        />
       </View>
 
-      <View style={{ gap: spacing[3] }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text variant="section">{t("home.challenges.title")}</Text>
-          <Text style={{ color: colors.lime, fontSize: 12, lineHeight: 16 }}>
-            {t("home.challenges.activeCount", { count: myGroups.length })}
-          </Text>
-        </View>
-
-        {myGroups.length > 0 ? (
-          myGroups.map((group) => (
-            <HomeGroupCard
-              key={group.id}
-              group={group}
-              onOpen={() => onGroup?.(group.id)}
-              onCheckin={() => onCheckin?.(group.id)}
-            />
-          ))
-        ) : (
-          <EmptyState
-            icon="🏋️"
-            title={t("home.empty.challengesTitle")}
-            description={t("home.empty.challengesDescription")}
-            cta={t("home.empty.challengesCta")}
-            onCta={() => onExplore?.()}
-          />
-        )}
-      </View>
-
-      <View style={{ gap: spacing[3], marginTop: spacing[6] }}>
-        <Text variant="section">{t("home.feed.title")}</Text>
-        {feed.length > 0 ? (
-          feed.map((item) => <HomeFeedCard key={item.id} item={item} />)
-        ) : (
-          <EmptyState
-            icon="📸"
-            title={t("home.feed.emptyTitle")}
-            description={t("home.feed.emptyDescription")}
-          />
-        )}
-      </View>
+      {activeTab === "challenges" ? (
+        <ChallengesTab
+          groups={myGroups}
+          onGroup={onGroup}
+          onCheckin={onCheckin}
+          onExplore={onExplore}
+        />
+      ) : (
+        <FeedTabs feed={feed} />
+      )}
     </Screen>
   );
 }
