@@ -1,0 +1,36 @@
+name: pull_requests
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Linting e TypeScript
+    runs-on: ubuntu-latest
+
+    env:
+      CI: true
+      HUSKY: "0"
+
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v6
+
+      - name: configurar o node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: validar lint
+        run: npm run lint -- --max-warnings=0
+
+      - name: validar typescript
+        run: npm run typeCheck
