@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Baixar o código do repositório
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: configurar o node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
