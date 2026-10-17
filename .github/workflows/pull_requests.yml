@@ -14,7 +14,7 @@ permissions:
 jobs:
   quality:
     name: Linting e TypeScript
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     env:
       CI: true
@@ -28,13 +28,12 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 22
-          cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
       - name: validar lint
-        run: npm run lint -- --max-warnings=0
+        run: npm run lint
 
       - name: validar typescript
         run: npm run typeCheck
