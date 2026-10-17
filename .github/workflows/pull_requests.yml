@@ -1,0 +1,39 @@
+name: pull_requests
+
+on:
+  workflow_dispatch:
+
+  workflow_call:
+
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Linting e TypeScript
+    runs-on: ubuntu-24.04
+
+    env:
+      CI: true
+      HUSKY: "0"
+
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: configurar o node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: validar lint
+        run: npm run lint
+
+      - name: validar typescript
+        run: npm run typeCheck
